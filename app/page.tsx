@@ -8,6 +8,7 @@ import {
   BarChart3,
   Check,
   CircleDollarSign,
+  ChevronDown,
   Compass,
   Globe2,
   Layers3,
@@ -20,12 +21,21 @@ import {
   Zap,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const categories = [
   { icon: Compass, title: "Surveys & research", text: "Share your opinions and help brands understand real people." },
   { icon: Layers3, title: "Apps & offers", text: "Explore eligible apps, trials and partner promotions." },
   { icon: Target, title: "Microjobs", text: "Take on clear, bite-sized digital tasks at your own pace." },
   { icon: Sparkles, title: "AI data tasks", text: "Help improve digital experiences through supported data tasks." },
+];
+
+const faqs = [
+  { question: "Is SIVO available in every country?", answer: "SIVO is being designed for a global audience, but individual tasks, providers and payout options may be limited by country, age, device, or provider eligibility." },
+  { question: "Can I earn a guaranteed amount?", answer: "No. SIVO does not guarantee income. Task availability, approval and rewards depend on each provider’s rules and your eligibility." },
+  { question: "When will I be able to withdraw rewards?", answer: "Withdrawals will be available only after the wallet, verification, payout providers and applicable minimums are implemented. The current interface is a prototype and does not hold real funds." },
+  { question: "Why can a task reward remain pending?", answer: "Some providers need to validate completion before confirming a reward. A future live version will show clear statuses and any relevant provider review details." },
+  { question: "How does SIVO protect accounts?", answer: "The platform is planned to use account security controls, fraud prevention and clear usage rules. The live security and privacy systems are still under development." },
 ];
 
 const tasks = [
@@ -35,6 +45,8 @@ const tasks = [
 ];
 
 export default function Home() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
     <main className="site-shell">
       <div className="container">
@@ -171,7 +183,26 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="faq" style={{ paddingTop: 15, paddingBottom: 20 }}>
+        <section className="section faq-section" id="faq" style={{ paddingTop: 35, paddingBottom: 35 }}>
+          <div className="section-heading">
+            <div className="section-kicker">Good to know</div>
+            <h2 className="section-title">Questions, answered clearly.</h2>
+            <p className="section-copy">A few important details about how SIVO is planned to work.</p>
+          </div>
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <div className={openFaq === index ? "faq-item open" : "faq-item"} key={faq.question}>
+                <button className="faq-question" type="button" aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? null : index)}>
+                  <span>{faq.question}</span>
+                  <ChevronDown size={18} aria-hidden="true" />
+                </button>
+                {openFaq === index && <div className="faq-answer">{faq.answer}</div>}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section" id="get-started" style={{ paddingTop: 20, paddingBottom: 20 }}>
           <div className="final-cta">
             <div className="section-kicker">Your next step</div>
             <h2 className="section-title">Ready to explore what’s possible?</h2>
