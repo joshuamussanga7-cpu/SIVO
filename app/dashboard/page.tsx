@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import MobileNav from "@/components/MobileNav";
 import {
   ArrowRight, ArrowUpRight, Bell, CheckCircle2, Clock3, Compass, HelpCircle,
   LayoutDashboard, Settings, ShieldCheck, Sparkles, Trophy, Users, Wallet, Zap
@@ -22,6 +23,7 @@ const recentTasks = [
 export default function DashboardPage() {
   return (
     <main className="app-layout">
+      <MobileNav />
       <aside className="app-sidebar">
         <Link className="brand" href="/"><span className="brand-mark"><Zap size={20} fill="currentColor" /></span>SIVO<span style={{ color: "var(--cyan)" }}>.</span></Link>
         <div style={{ width: "100%" }}>
@@ -46,7 +48,7 @@ export default function DashboardPage() {
       <section className="app-main">
         <div className="app-topbar">
           <div><h1>Welcome to your space <span style={{ color: "var(--cyan)" }}>↗</span></h1><p>Here’s a quick look at your SIVO activity.</p></div>
-          <div className="app-top-actions"><button className="icon-button" aria-label="Notifications"><Bell size={17} /></button><span className="avatar" style={{ width: 38, height: 38 }}>S</span></div>
+          <div className="app-top-actions"><Link className="icon-button" href="/notifications" aria-label="Notifications"><Bell size={17} /></Link><span className="avatar" style={{ width: 38, height: 38 }}>S</span></div>
         </div>
         <div className="prototype-banner"><strong style={{ color: "#a7fff4" }}>Preview mode.</strong> Figures and tasks below are sample data for interface review only. They are not real balances, live offers or withdrawable earnings. Account, provider and payout services are not connected.</div>
 
