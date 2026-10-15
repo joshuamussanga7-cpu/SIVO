@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, BadgeCheck, Bell, CircleDollarSign, Clock3, Compass, Gift, HelpCircle, Layers3, ShieldCheck, Sparkles, Trophy, Users, Wallet, Zap } from "lucide-react";
 
 type ScreenKind = "earn" | "wallet" | "referrals" | "achievements" | "profile" | "support" | "notifications" | "privacy" | "terms";
@@ -93,6 +96,12 @@ const screens: Record<ScreenKind, { title: string; description: string; items: {
 
 export default function PreviewPage({ kind }: { kind: ScreenKind }) {
   const screen = screens[kind];
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredItems = useMemo(() => {
+    if (kind !== "earn" || !searchTerm.trim()) return screen.items;
+    const query = searchTerm.trim().toLowerCase();
+    return screen.items.filter((item) => `${item.title} ${item.description}`.toLowerCase().includes(query));
+  }, [kind, searchTerm, screen.items]);
   return (
     <main className="site-shell" style={{ minHeight: "100vh" }}>
       <div className="container" style={{ paddingBottom: 50 }}>
@@ -109,7 +118,7 @@ export default function PreviewPage({ kind }: { kind: ScreenKind }) {
             <h1>{screen.title}</h1>
             <p>{screen.description}</p>
           </div>
-          {kind === "earn" && <div className="secondary-toolbar"><input className="secondary-search" aria-label="Search sample opportunities" placeholder="Search opportunities (preview only)" /><span style={{ color: "#8290a7", fontSize: 11 }}>Recommended · Sample cards</span></div>}
+          {kind === "earn" && <div className="secondary-toolbar"><input className="secondary-search" aria-label="Search sample opportunities" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Search sample opportunities..." /><span style={{ color: "#8290a7", fontSize: 11 }}>{filteredItems.length} sample {filteredItems.length === 1 ? "opportunity" : "opportunities"}</span></div>}
           {screen.items.length > 0 && <div className="secondary-grid">
             {screen.items.map((item) => {
               const Icon = item.icon;
