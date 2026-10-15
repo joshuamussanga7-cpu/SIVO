@@ -257,3 +257,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .dash-card-value { font-size: 23px; }
   .dash-card-label { font-size: 10px; }
 }
+
+
+/* Secondary app screens */
+.secondary-screen { max-width: 1100px; margin: 0 auto; }
+.secondary-heading { margin: 18px 0 24px; }
+.secondary-heading h1 { margin: 0; font: 600 clamp(28px,4vw,38px) 'Space Grotesk',sans-serif; letter-spacing: -.05em; }
+.secondary-heading p { color: #9aa7bd; font-size: 13px; line-height: 1.8; max-width: 650px; }
+.secondary-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 13px; }
+.secondary-item { padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: rgba(16,21,35,.76); }
+.secondary-item h3 { margin: 13px 0 7px; font-size: 13px; }
+.secondary-item p { margin: 0; color: #91a0b7; font-size: 11px; line-height: 1.7; }
+.secondary-item .task-reward { margin-top: 15px; }
+.secondary-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.secondary-search { width: min(100%,320px); border: 1px solid var(--line); border-radius: 11px; padding: 12px 14px; outline: none; color: white; background: rgba(255,255,255,.025); font-size: 12px; }
+.secondary-search:focus { border-color: rgba(101,242,226,.55); }
+.secondary-note { margin-top: 18px; padding: 14px 16px; border: 1px solid rgba(101,242,226,.16); border-radius: 12px; color: #a6b6c7; background: rgba(101,242,226,.045); font-size: 11px; line-height: 1.8; }
+@media (max-width: 650px) { .secondary-grid { grid-template-columns: 1fr; } }
