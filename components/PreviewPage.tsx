@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BadgeCheck, Bell, CircleDollarSign, Clock3, Compass, Gift, HelpCircle, Layers3, ShieldCheck, Sparkles, Trophy, Users, Wallet, Zap } from "lucide-react";
 
-type ScreenKind = "earn" | "wallet" | "referrals" | "achievements" | "profile" | "support" | "privacy" | "terms";
+type ScreenKind = "earn" | "wallet" | "referrals" | "achievements" | "profile" | "support" | "notifications" | "privacy" | "terms";
 
 const screens: Record<ScreenKind, { title: string; description: string; items: { icon: typeof Compass; title: string; description: string; value?: string }[]; note: string }> = {
   earn: {
@@ -66,6 +66,16 @@ const screens: Record<ScreenKind, { title: string; description: string; items: {
       { icon: ShieldCheck, title: "Account review or appeal", description: "A structured route for account and reward decisions.", value: "Appeals flow planned" },
     ],
     note: "Support channels are not live yet. The final support and appeal process will be published before launch.",
+  },
+  notifications: {
+    title: "Your updates",
+    description: "Important account, task-review and payout updates will appear here when notification services are connected.",
+    items: [
+      { icon: Bell, title: "Task status updates", description: "See when a submitted task moves to pending, approved or rejected.", value: "Planned" },
+      { icon: Wallet, title: "Wallet activity", description: "Receive updates about reward approvals and withdrawal requests.", value: "Planned" },
+      { icon: ShieldCheck, title: "Account and security", description: "Get relevant notices about verification, sign-ins and account reviews.", value: "Planned" },
+    ],
+    note: "Notifications are not connected and no messages shown here represent actual account activity.",
   },
   privacy: {
     title: "Privacy policy",
