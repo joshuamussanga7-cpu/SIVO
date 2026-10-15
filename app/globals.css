@@ -274,3 +274,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .secondary-search:focus { border-color: rgba(101,242,226,.55); }
 .secondary-note { margin-top: 18px; padding: 14px 16px; border: 1px solid rgba(101,242,226,.16); border-radius: 12px; color: #a6b6c7; background: rgba(101,242,226,.045); font-size: 11px; line-height: 1.8; }
 @media (max-width: 650px) { .secondary-grid { grid-template-columns: 1fr; } }
+
+
+/* Fixed mobile app navigation */
+.mobile-app-nav { display: none; }
+@media (max-width: 580px) {
+  .mobile-app-nav { position: fixed; z-index: 30; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 3px; padding: 8px 6px; border: 1px solid rgba(160,177,211,.2); border-radius: 18px; background: rgba(10,14,25,.92); box-shadow: 0 12px 45px rgba(0,0,0,.42); backdrop-filter: blur(22px); }
+  .mobile-app-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 0; padding: 7px 2px; border-radius: 11px; color: #8996ad; font-size: 9px; }
+  .mobile-app-nav a.active { color: var(--cyan); background: rgba(101,242,226,.09); }
+  .app-main { padding-bottom: 108px; }
+}
