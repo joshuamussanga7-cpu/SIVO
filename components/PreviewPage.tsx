@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, BadgeCheck, Bell, CircleDollarSign, Clock3, Compass, Gift, HelpCircle, Layers3, ShieldCheck, Sparkles, Trophy, Users, Wallet, Zap } from "lucide-react";
 
-type ScreenKind = "earn" | "wallet" | "referrals" | "achievements" | "profile" | "support" | "notifications" | "privacy" | "terms";
+type ScreenKind = "earn" | "wallet" | "referrals" | "achievements" | "profile" | "support" | "notifications" | "activity" | "privacy" | "terms";
 
 const screens: Record<ScreenKind, { title: string; description: string; items: { icon: typeof Compass; title: string; description: string; value?: string }[]; note: string }> = {
   earn: {
@@ -80,6 +80,16 @@ const screens: Record<ScreenKind, { title: string; description: string; items: {
     ],
     note: "Notifications are not connected and no messages shown here represent actual account activity.",
   },
+  activity: {
+    title: "Your activity",
+    description: "A single timeline for task submissions, reward decisions and payout updates. The entries below are examples, not real account activity.",
+    items: [
+      { icon: Compass, title: "Consumer habits survey", description: "Example task submission · Status: pending review", value: "Sample +$1.80" },
+      { icon: BadgeCheck, title: "Productivity app offer", description: "Example provider confirmation · Status: approved", value: "Sample +$3.50" },
+      { icon: Wallet, title: "Withdrawal request", description: "Example payout request · No payment service is connected", value: "Sample −$10.00" },
+    ],
+    note: "This activity timeline is illustrative. In production, each entry must be generated from verified server-side events and the wallet ledger, not client-submitted values.",
+  },
   privacy: {
     title: "Privacy policy",
     description: "The SIVO privacy policy is not published yet. It will be adapted from the existing SAVI policy only after its exact text is reviewed and SIVO’s own providers, data flows and legal responsibilities are confirmed.",
@@ -133,7 +143,7 @@ export default function PreviewPage({ kind }: { kind: ScreenKind }) {
           <div className="secondary-note"><strong style={{ color: "#b7fff5" }}>Prototype notice: </strong>{screen.note}</div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 23 }}>
             <Link href="/dashboard" className="btn btn-primary">View dashboard <ArrowRight size={14} /></Link>
-            {kind !== "earn" && <Link href="/earn" className="btn btn-secondary">Explore opportunities <Compass size={14} /></Link>}
+            {kind === "wallet" && <Link href="/wallet/withdraw" className="btn btn-secondary">Withdrawal preview <Wallet size={14} /></Link>}{kind !== "earn" && <Link href="/earn" className="btn btn-secondary">Explore opportunities <Compass size={14} /></Link>}{kind === "activity" && <Link href="/wallet" className="btn btn-secondary">Open wallet <Wallet size={14} /></Link>}
           </div>
         </div>
         <footer className="footer" style={{ marginTop: 60 }}>
